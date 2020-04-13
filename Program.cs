@@ -24,8 +24,20 @@ namespace RockPaperScissors
         {
             Console.WriteLine("Number of external session(s) : Useful for finding the most likely event : Write 1 if not sure");
             int extlooptime = Convert.ToInt32(Console.ReadLine());
+
+            if (extlooptime == 0)
+            {
+                return;
+            }
+
             Console.WriteLine("Number of session(s)");
             int looptime = Convert.ToInt32(Console.ReadLine());
+
+            if (looptime == 0)
+            {
+                return;
+            }
+
             Console.Clear();
 
             int extloopcount = 1;
@@ -72,14 +84,39 @@ namespace RockPaperScissors
                     Console.Clear();
                 }
             }
-            Console.WriteLine("MaxConsecutiveDraw: " + drawList.Max() + " Draw(s) per 1 session");
-            Console.WriteLine("MaxConsecutiveWin: " + winList.Max() + " Win(s) in a successive row of sessions");
+
+            if (drawList.Count() == 0)
+            {
+                Console.WriteLine("MaxConsecutiveDraw: 0 Draw per 1 session");
+            }
+            else
+            {
+                Console.WriteLine("MaxConsecutiveDraw: " + drawList.Max() + " Draw(s) per 1 session");
+            }
+
+            if (winList.Count() == 0)
+            {
+                Console.WriteLine("MaxConsecutiveWin: 0 Win per 1 session");
+            }
+            else
+            {
+                Console.WriteLine("MaxConsecutiveWin: " + winList.Max() + " Win(s) in a successive row of sessions");
+            }
 
             if (extloopcount < extlooptime)
             {
                 extloopcount++;
-                avgDrawList.Add(drawList.Max());
-                avgWinList.Add(winList.Max());
+
+                if (drawList.Count() > 0)
+                {
+                    avgDrawList.Add(drawList.Max());
+                }
+
+                if (winList.Count() > 0)
+                {
+                    avgWinList.Add(winList.Max());
+                }
+
                 win = 0;
                 win2 = 0;
                 lose = 0;
@@ -91,11 +128,40 @@ namespace RockPaperScissors
                 goto externalloop;
             }
 
+            Console.WriteLine("");
+
             if (extloopcount > 1)
             {
-                Console.WriteLine("avgConsecutiveDraw: " + avgDrawList.Average() + " Average draw(s) per 1 session");
-                Console.WriteLine("avgConsecutiveWin: " + avgWinList.Average() + " Average win(s) in a successive row of sessions");
+                double disp1 = 0;
+                double disp2 = 0;
+                double disp3 = 0;
+                double disp4 = 0;
+
+                if(avgDrawList.Count() > 0)
+                {
+                    disp1 = avgDrawList.Average();
+                    disp3 = avgDrawList.Max();
+                }
+
+                if (avgWinList.Count() > 0)
+                {
+                    disp2 = avgWinList.Average();
+                    disp4 = avgWinList.Max();
+                }
+
+                Console.WriteLine("avgGlobalConsecutiveDraw: " + disp1 + " Average global draw(s) per 1 session");
+                Console.WriteLine("avgGlobalConsecutiveWin: " + disp2 + " Average global win(s) in a successive row of sessions");
+                Console.WriteLine("MaxGlobalConsecutiveDraw: " + disp3 + " Max global draw(s) per 1 session");
+                Console.WriteLine("MaxGlobalConsecutiveWin: " + disp4 + " Max global win(s) in a successive row of sessions");
+                Console.WriteLine("");
             }
+
+            Console.WriteLine("Number of external session(s): " + extlooptime + " External session(s)");
+            Console.WriteLine("Number of session(s): " + looptime + " Session(s)");
+
+            Console.WriteLine("");
+
+            Console.WriteLine("Press any key to terminate the program...");
 
             Console.ReadKey();
         }
