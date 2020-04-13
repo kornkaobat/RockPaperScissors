@@ -125,6 +125,7 @@ namespace RockPaperScissors
                 drawList.TrimExcess();
                 winList.Clear();
                 winList.TrimExcess();
+                Console.Clear();
                 goto externalloop;
             }
 
