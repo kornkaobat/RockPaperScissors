@@ -25,7 +25,7 @@ namespace RockPaperScissors
             Console.WriteLine("Number of external session(s) : Useful for finding the most likely event : Write 1 if not sure");
             int extlooptime = Convert.ToInt32(Console.ReadLine());
 
-            if (extlooptime == 0)
+            if (extlooptime <= 0)
             {
                 return;
             }
@@ -33,7 +33,7 @@ namespace RockPaperScissors
             Console.WriteLine("Number of session(s)");
             int looptime = Convert.ToInt32(Console.ReadLine());
 
-            if (looptime == 0)
+            if (looptime <= 0)
             {
                 return;
             }
